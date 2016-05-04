@@ -19,8 +19,9 @@ package org.apache.flume.source;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Preconditions;
-import org.apache.flume.client.avro.ReliableSpoolingFileEventReaderExt;
+import com.google.common.base.Throwables;
 import org.apache.flume.*;
+import org.apache.flume.client.avro.ReliableSpoolingFileEventReaderExt;
 import org.apache.flume.conf.Configurable;
 import org.apache.flume.instrumentation.SourceCounter;
 import org.apache.flume.serialization.DecodeErrorPolicy;
@@ -274,7 +275,7 @@ public class SpoolDirectoryRecursiveSource extends AbstractSource implements
                         "Restart or reconfigure Flume to continue processing.", t);
                 hasFatalError = true;
 
-//                Throwables.propagate(t);
+                Throwables.propagate(t);
             }
         }
     }
